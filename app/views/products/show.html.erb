@@ -1,0 +1,25 @@
+<div class="jumbotron">
+	<h1><%= @product.title %></h1>
+	
+	<% if @product.discount.to_i > 0 %>
+		<h4>Price with discount: <%= Integer(@product.price)-Integer(@product.discount) %></h4>
+	<%else%>
+		<h4>Price: <%= @product.price %></h4>
+	<% end %>
+	
+	<p><%= @product.description %></p>
+	
+	<% if @product.available == true %>
+		<div class="alert alert-success" role="alert">
+  			<strong>Product is available in stock</strong> 
+		</div>
+	<% else %>
+		<div class="alert alert-danger" role="alert">
+  			<strong>Product is out of stock</strong>
+		</div>
+	<% end %>
+
+	<button type="button" class="btn"><%= link_to "Back", root_path %></button>
+	<button type="button" class="btn"><%= link_to "Edit", edit_product_path(@product) %></button>
+	<button type="button" class="btn btn-danger"><%= link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure? This will be undone"} %></button>
+	</div>

@@ -1,0 +1,27 @@
+<% @products.each do |product| %>
+	<div class="jumbotron">
+		<%= image_tag product.image.url(:medium) %>
+
+	<h1><%= link_to product.title, product %></h1>
+	
+	<% if product.discount.to_i > 0 %>
+		<h4>Price with discount: <%= Integer(product.price)-Integer(product.discount) %></h4>
+	<%else%>
+		<h4>Price: <%= product.price %></h4>
+	<% end %>
+	
+	<p><%= product.description %></p>
+	
+	<% if product.available == true %>
+		<div class="alert alert-success" role="alert">
+  			<strong>Product is available in stock</strong> 
+		</div>
+	<% else %>
+		<div class="alert alert-danger" role="alert">
+  			<strong>Product is out of stock</strong>
+		</div>
+	<% end %>
+	</div>
+	<% end %>
+
+	<button type="button" class="btn btn-success"><%= link_to "New Product",new_product_path %></button>
